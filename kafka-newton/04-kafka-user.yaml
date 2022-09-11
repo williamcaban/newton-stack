@@ -1,0 +1,50 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaUser
+metadata:
+  name: newton-user
+  labels:
+    strimzi.io/cluster: kafka-newton
+spec:
+  authentication:
+    type: tls
+  authorization:
+    type: simple
+    acls:
+      # Example consumer Acls for topic newton-ocp using consumer group my-group
+      - resource:
+          type: topic
+          name: newton-ocp
+          patternType: literal
+        operation: Read
+        host: "*"
+      - resource:
+          type: topic
+          name: newton-ocp
+          patternType: literal
+        operation: Describe
+        host: "*"
+      - resource:
+          type: group
+          name: my-group
+          patternType: literal
+        operation: Read
+        host: "*"
+      # Example Producer Acls for topic newton-ocp
+      - resource:
+          type: topic
+          name: newton-ocp
+          patternType: literal
+        operation: Write
+        host: "*"
+      - resource:
+          type: topic
+          name: newton-ocp
+          patternType: literal
+        operation: Create
+        host: "*"
+      - resource:
+          type: topic
+          name: newton-ocp
+          patternType: literal
+        operation: Describe
+        host: "*"

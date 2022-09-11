@@ -1,0 +1,16 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: newton-ocp
+  labels:
+    strimzi.io/cluster: kafka-newton
+  namespace: newton-odh
+spec:
+  partitions: 10
+  replicas: 3
+  config:
+    # 7200000 = 2 hrs
+    # 604800000 = 7 days
+    retention.ms: 604800000
+    # 1073741824 Bytes = 1 GiB
+    segment.bytes: 1073741824

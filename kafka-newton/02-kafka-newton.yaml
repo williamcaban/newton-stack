@@ -1,0 +1,72 @@
+kind: Kafka
+apiVersion: kafka.strimzi.io/v1beta2
+metadata:
+  name: kafka-newton
+  namespace: newton-odh
+spec:
+  kafka:
+    # https://strimzi.io/docs/operators/in-development/configuring.html#proc-config-kafka-str
+    version: 3.1.0
+    replicas: 1
+    logging:
+      type: inline
+      loggers: kafka.rool.logger.level: "INFO"
+    # limit resources for lab environment
+    resources:
+      requests:
+        memory: 200Mi
+        cpu: 100m
+      limits:
+        memory: 1Gi
+        cpu: 1
+    readinessProbe:
+      initialDelaySeconds: 15
+      timeoutSeconds: 5
+    livenessProbe:
+      initialDelaySeconds: 15
+      timeoutSeconds: 5
+    # jvmOptions:
+    #   -Xms: 2048m
+    #   -Xmx: 2048m
+    listeners:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+        configuration:
+          useServiceDnsDomain: true
+      - name: tls
+        port: 9093
+        type: internal
+        tls: true
+      - name: external
+        port: 9094
+        type: route
+        tls: true
+        #authentication:
+        #  type: tls 
+        # configuration:
+        #   bootstrap:
+        #     host: bootstrap
+        #   brokers:
+        #   - broker: 0
+        #     host: broker-0
+        #   - broker: 1
+        #     host: broker-1
+        #   - broker: 2
+        #     host: broker-2
+    config:
+    #   offsets.topic.replication.factor: 3
+    #   transaction.state.log.replication.factor: 3
+    #   transaction.state.log.min.isr: 2
+      default.replication.factor: 1
+      min.insync.replicas: 1
+    storage:
+      type: ephemeral
+  zookeeper:
+    replicas: 1
+    storage:
+      type: ephemeral
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}
