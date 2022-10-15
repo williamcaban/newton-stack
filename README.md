@@ -103,6 +103,19 @@ Features:
 - Automated GitOps bootstrapping using Tekton and Argo CD with GitOps Application Manager CLI
 
 
+## ODF LVM Operator 4.10.6
+
+The ODF LVM Operator manages local storage using LVM.
+## OpenShift Local Storage 4.10.0
+
+Operator that configures local storage volumes for use in Kubernetes and OpenShift.
+## OpenShift Data Foundation (ODF) 4.10.6
+
+Red Hat OpenShift Data Foundation deploys three operators:
+- OpenShift Data Foundation
+- Rook Operator
+- NooBaa Operator
+
 ## Performance Addon Operator 4.10.8
 
 Performance Addon Operator provides the ability to enable advanced node performance tunings on a set of nodes.

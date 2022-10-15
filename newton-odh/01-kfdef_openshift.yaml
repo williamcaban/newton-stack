@@ -60,18 +60,18 @@ spec:
   #       name: manifests
   #       path: radanalyticsio/spark/cluster
   #   name: radanalyticsio-spark-cluster
-  ## Prometheus - subscribe to the prometheus operator
-  # - kustomizeConfig:
-  #     repoRef:
-  #       name: manifests
-  #       path: prometheus/cluster
-  #   name: prometheus-cluster
-  ## Prometheus - deploy a prometheus instance
-  # - kustomizeConfig:
-  #     repoRef:
-  #       name: manifests
-  #       path: prometheus/operator
-  #   name: prometheus-operator
+  # Prometheus - subscribe to the prometheus operator
+  - kustomizeConfig:
+      repoRef:
+        name: manifests
+        path: prometheus/cluster
+    name: prometheus-cluster
+  # Prometheus - deploy a prometheus instance
+  - kustomizeConfig:
+      repoRef:
+        name: manifests
+        path: prometheus/operator
+    name: prometheus-operator
   ## JupyterHub - 
   - kustomizeConfig:
       parameters:
@@ -114,7 +114,7 @@ spec:
   #       name: manifests
   #       path: odhargo/odhargo
   #   name: odhargo
-  ## Model Mesh - instance of model mesh serving service
+  # # Model Mesh - instance of model mesh serving service
   # - kustomizeConfig:
   #     overlays:
   #       - odh-model-controller
@@ -136,9 +136,4 @@ spec:
     uri: https://github.com/opendatahub-io/manifests/tarball/v1.5-branch-openshift
   - name: manifests
     uri: https://github.com/opendatahub-io/odh-manifests/tarball/master
-    #uri: https://github.com/opendatahub-io/odh-manifests/tarball/v1.3
-    #uri: https://github.com/opendatahub-io/manifests/archive/v1.5-branch-openshift.tar.gz
-  # - name: newton
-  #   uri: https://github.com/williamcaban/newton-stack/tarball/master
-  #version: v1.5.0
   #version: master

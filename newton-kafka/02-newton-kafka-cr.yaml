@@ -1,8 +1,8 @@
 kind: Kafka
 apiVersion: kafka.strimzi.io/v1beta2
 metadata:
-  name: kafka-newton
-  namespace: newton-odh
+  name: newton-kafka
+  namespace: newton-kafka
 spec:
   kafka:
     # https://strimzi.io/docs/operators/in-development/configuring.html#proc-config-kafka-str
@@ -10,7 +10,8 @@ spec:
     replicas: 1
     logging:
       type: inline
-      loggers: kafka.rool.logger.level: "INFO"
+      loggers:
+        connect.root.logger.level: "INFO"
     # limit resources for lab environment
     resources:
       requests:
